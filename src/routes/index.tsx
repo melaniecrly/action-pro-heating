@@ -366,12 +366,32 @@ function BretagneMap() {
 }
 
 function ContactForm() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        setSent(true);
+        if (status === "sending") return;
+        setStatus("sending");
+        setErrorMsg(null);
+        const fd = new FormData(e.currentTarget);
+        const payload = Object.fromEntries(fd.entries());
+        try {
+          const res = await fetch("/api/public/quote-request", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          setStatus("sent");
+          (e.target as HTMLFormElement).reset();
+        } catch (err) {
+          console.error(err);
+          setErrorMsg("Impossible d'envoyer votre demande. Merci d'appeler ou d'écrire par email.");
+          setStatus("error");
+        }
       }}
       className="bg-white rounded-3xl shadow-soft border border-border p-6 sm:p-8 grid gap-4"
     >
@@ -380,7 +400,7 @@ function ContactForm() {
         <Input label="Prénom" name="prenom" required />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
-        <Input label="Téléphone" name="tel" type="tel" required />
+        <Input label="Téléphone" name="telephone" type="tel" required />
         <Input label="Email" name="email" type="email" required />
       </div>
       <Input label="Adresse" name="adresse" />
@@ -397,13 +417,25 @@ function ContactForm() {
           placeholder="Symptômes constatés, âge de l'installation, surface concernée..."
         />
       </div>
-      <button type="submit" className="btn-cta w-full sm:w-auto justify-center">
-        {sent ? "Demande envoyée ✓" : "Envoyer ma demande"}
-        {!sent && <ArrowRight className="w-4 h-4" />}
+      {/* Honeypot anti-spam */}
+      <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+
+      <button type="submit" disabled={status === "sending"} className="btn-cta w-full sm:w-auto justify-center disabled:opacity-70">
+        {status === "sending" ? "Envoi en cours..." : status === "sent" ? "Demande envoyée ✓" : "Envoyer ma demande"}
+        {status === "idle" && <ArrowRight className="w-4 h-4" />}
       </button>
-      {sent && (
-        <p className="text-sm text-navy/70">Merci ! Nous vous recontactons sous 24h ouvrées.</p>
+      {status === "sent" && (
+        <p className="text-sm text-navy/70">
+          Merci ! Votre demande a bien été transmise à <strong>contact@actiondesembouage.fr</strong>. Nous vous recontactons sous 24h ouvrées.
+        </p>
       )}
+      {status === "error" && errorMsg && (
+        <p className="text-sm text-brand-red">{errorMsg}</p>
+      )}
+      <p className="text-xs text-muted-foreground">
+        En envoyant ce formulaire, vous acceptez notre{" "}
+        <Link to="/politique-confidentialite" className="underline hover:text-blue-secondary">politique de confidentialité</Link>.
+      </p>
     </form>
   );
 }
