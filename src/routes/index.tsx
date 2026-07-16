@@ -270,9 +270,47 @@ function Section({ id, eyebrow, title, subtitle, children, tone = "white" }: {
 }
 
 function BretagneMap() {
+  // Stylized Bretagne silhouette. East side (right) attaches to mainland France.
+  // Departments approx:
+  //   Finistère (west)      - top-left + bottom-left
+  //   Côtes-d'Armor (north) - top-right
+  //   Ille-et-Vilaine (east)- right
+  //   Morbihan (south)      - bottom-center/right
+  const bretagne =
+    "M 560,140 " +
+    "L 560,110 L 540,105 L 520,120 L 495,105 L 470,115 L 445,100 " + // north coast east
+    "L 420,115 L 395,105 L 370,120 L 345,110 L 320,125 L 295,115 " + // north coast center
+    "L 270,130 L 245,120 L 220,135 L 195,125 L 170,140 L 145,130 " + // north coast west
+    "L 118,150 L 95,140 L 78,160 L 65,155 " +                        // Léon
+    "L 55,175 L 40,180 L 30,200 L 42,215 L 60,210 " +                // Iroise / Pointe St Mathieu
+    "L 55,230 L 40,240 L 30,255 L 45,265 L 65,258 L 55,275 " +       // Crozon peninsula (jag)
+    "L 75,285 L 95,275 L 88,295 L 68,305 L 55,320 " +                // Pointe du Raz area
+    "L 75,330 L 100,318 L 125,325 L 145,318 L 160,335 " +            // Cap Sizun / Audierne
+    "L 185,325 L 200,340 L 225,332 L 245,342 " +                     // Quimper south
+    "L 265,340 L 285,352 L 305,345 L 320,358 L 340,350 " +           // Concarneau / Quimperlé
+    "L 360,360 L 380,352 L 395,365 L 410,355 " +                     // Lorient
+    "L 420,370 L 400,378 L 415,382 L 435,372 L 455,378 " +           // Quiberon peninsula dip
+    "L 475,368 L 490,378 L 510,370 L 530,362 " +                     // Golfe du Morbihan / Vannes
+    "L 550,352 L 570,340 L 585,320 L 578,300 " +                     // south-east coast
+    "L 588,280 L 580,260 L 590,240 L 580,220 L 588,200 L 578,180 L 585,160 Z";
+
+  // Sud-Finistère: south-western portion
+  const sudFinistere =
+    "M 30,200 L 42,215 L 60,210 L 55,230 L 40,240 L 30,255 L 45,265 L 65,258 L 55,275 " +
+    "L 75,285 L 95,275 L 88,295 L 68,305 L 55,320 L 75,330 L 100,318 L 125,325 L 145,318 L 160,335 " +
+    "L 185,325 L 200,340 L 225,332 L 245,342 L 265,340 L 285,352 L 300,345 " +
+    "L 305,300 L 285,270 L 250,250 L 210,235 L 170,225 L 130,220 L 90,215 L 55,205 Z";
+
+  // Morbihan: south-eastern portion
+  const morbihan =
+    "M 300,345 L 305,340 L 320,358 L 340,350 L 360,360 L 380,352 L 395,365 L 410,355 " +
+    "L 420,370 L 400,378 L 415,382 L 435,372 L 455,378 L 475,368 L 490,378 L 510,370 L 530,362 " +
+    "L 550,352 L 555,335 L 540,320 L 515,308 L 485,300 L 450,295 L 415,292 L 380,290 " +
+    "L 345,295 L 320,310 L 305,325 Z";
+
   return (
     <div className="relative w-full aspect-[4/3] max-w-lg mx-auto reveal">
-      <svg viewBox="0 0 500 400" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 620 420" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="mor" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="#04B2D9" />
@@ -282,45 +320,42 @@ function BretagneMap() {
             <stop offset="0%" stopColor="#048ABF" />
             <stop offset="100%" stopColor="#1B3659" />
           </linearGradient>
-          <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="2" />
-          </filter>
         </defs>
-        {/* Base brittany silhouette (stylized) */}
-        <path
-          d="M40,180 C60,140 100,120 160,115 C220,110 260,90 320,95 C380,100 430,130 460,170 C475,200 470,235 450,255 C420,285 380,300 340,305 C300,310 270,325 230,325 C180,325 130,315 90,290 C55,270 30,235 40,180 Z"
-          fill="#EAF3F9"
-          stroke="#CFE1EC"
-          strokeWidth="1.5"
-        />
-        {/* Sud Finistère (west) */}
-        <path
-          d="M40,180 C60,140 100,120 160,115 C190,113 205,120 210,150 C215,190 195,235 165,270 C130,300 90,290 65,270 C40,250 30,215 40,180 Z"
-          fill="url(#fin)"
-          opacity="0.9"
-          filter="url(#soft)"
-        />
-        {/* Morbihan (south) */}
-        <path
-          d="M180,220 C200,205 240,205 285,215 C330,225 370,245 385,275 C395,300 375,315 340,318 C300,322 250,325 210,315 C180,308 165,285 170,260 C172,245 175,232 180,220 Z"
-          fill="url(#mor)"
-          opacity="0.95"
-          filter="url(#soft)"
-        />
-        {/* labels */}
+
+        {/* Base Bretagne silhouette */}
+        <path d={bretagne} fill="#EAF3F9" stroke="#B8D3E3" strokeWidth="1.5" strokeLinejoin="round" />
+
+        {/* Sud-Finistère highlighted */}
+        <path d={sudFinistere} fill="url(#fin)" opacity="0.92" stroke="#ffffff" strokeWidth="1.2" />
+
+        {/* Morbihan highlighted */}
+        <path d={morbihan} fill="url(#mor)" opacity="0.95" stroke="#ffffff" strokeWidth="1.2" />
+
+        {/* Labels */}
         <g fontFamily="Plus Jakarta Sans, sans-serif" fontWeight="700">
-          <text x="115" y="200" fill="#fff" fontSize="14" textAnchor="middle">Sud Finistère</text>
-          <text x="275" y="275" fill="#fff" fontSize="16" textAnchor="middle">Morbihan</text>
+          <text x="150" y="290" fill="#ffffff" fontSize="14" textAnchor="middle">Sud-Finistère</text>
+          <text x="430" y="340" fill="#ffffff" fontSize="16" textAnchor="middle">Morbihan</text>
+          <text x="400" y="180" fill="#1B3659" fontSize="11" textAnchor="middle" opacity="0.55">Côtes-d'Armor</text>
+          <text x="545" y="230" fill="#1B3659" fontSize="11" textAnchor="middle" opacity="0.55">Ille-et-Vilaine</text>
+          <text x="150" y="180" fill="#1B3659" fontSize="11" textAnchor="middle" opacity="0.55">Finistère Nord</text>
         </g>
-        {/* pins */}
+
+        {/* Pins - Vannes (Morbihan) */}
         <g>
-          <circle cx="275" cy="270" r="6" fill="#D90D1E" />
-          <circle cx="275" cy="270" r="12" fill="#D90D1E" opacity="0.25">
+          <circle cx="470" cy="355" r="6" fill="#D90D1E" />
+          <circle cx="470" cy="355" r="12" fill="#D90D1E" opacity="0.25">
             <animate attributeName="r" values="10;18;10" dur="2.4s" repeatCount="indefinite" />
             <animate attributeName="opacity" values="0.35;0;0.35" dur="2.4s" repeatCount="indefinite" />
           </circle>
-          <circle cx="120" cy="195" r="5" fill="#D90D1E" />
-          <circle cx="120" cy="195" r="10" fill="#D90D1E" opacity="0.25">
+          {/* Lorient */}
+          <circle cx="380" cy="345" r="5" fill="#D90D1E" />
+          <circle cx="380" cy="345" r="10" fill="#D90D1E" opacity="0.25">
+            <animate attributeName="r" values="8;16;8" dur="2.4s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.35;0;0.35" dur="2.4s" repeatCount="indefinite" />
+          </circle>
+          {/* Quimperlé / Sud-Finistère */}
+          <circle cx="240" cy="320" r="5" fill="#D90D1E" />
+          <circle cx="240" cy="320" r="10" fill="#D90D1E" opacity="0.25">
             <animate attributeName="r" values="8;16;8" dur="2.4s" repeatCount="indefinite" />
             <animate attributeName="opacity" values="0.35;0;0.35" dur="2.4s" repeatCount="indefinite" />
           </circle>
