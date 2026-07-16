@@ -587,7 +587,7 @@ function Index() {
             <div className="reveal grid gap-4">
               <div className="rounded-2xl border border-border p-6 bg-white text-center flex flex-col items-center justify-center min-h-[140px]">
                 <Shield className="w-8 h-8 text-blue-secondary mb-2" />
-                <div className="text-sm font-semibold text-navy">Assurance décennale</div>
+                <div className="text-sm font-semibold text-navy">Responsabilité civile</div>
               </div>
               <div className="rounded-2xl border border-border p-6 bg-white text-center flex flex-col items-center justify-center min-h-[140px]">
                 <CheckCircle2 className="w-8 h-8 text-turquoise mb-2" />
