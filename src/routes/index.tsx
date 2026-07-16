@@ -227,7 +227,7 @@ function Hero() {
               </div>
               <div>
                 <div className="font-semibold text-navy text-sm">Rendement optimisé</div>
-                <div className="text-xs text-muted-foreground">jusqu'à -25% de conso</div>
+                <div className="text-xs text-muted-foreground">jusqu'à -15% de conso</div>
               </div>
             </div>
           </div>
