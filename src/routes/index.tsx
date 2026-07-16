@@ -824,8 +824,8 @@ function Index() {
           <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-3 text-xs text-white/60">
             <div>© {new Date().getFullYear()} Action Désembouage. Tous droits réservés.</div>
             <div className="flex gap-4">
-              <a href="#" className="hover:text-turquoise">Mentions légales</a>
-              <a href="#" className="hover:text-turquoise">Politique de confidentialité</a>
+              <Link to="/mentions-legales" className="hover:text-turquoise">Mentions légales</Link>
+              <Link to="/politique-confidentialite" className="hover:text-turquoise">Politique de confidentialité</Link>
             </div>
           </div>
         </div>
