@@ -40,7 +40,7 @@ export const Route = createFileRoute("/")({
           description:
             "Spécialiste du désembouage de systèmes de chauffage : planchers chauffants, radiateurs et installations solaires dans le Morbihan et le Sud-Finistère.",
           areaServed: ["Morbihan", "Sud-Finistère"],
-          telephone: "+33200000000",
+          telephone: "+33759750218",
           priceRange: "€€",
         }),
       },
