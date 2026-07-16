@@ -9,9 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique-confidentialite'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicQuoteRequestRouteImport } from './routes/api/public/quote-request'
 
+const PolitiqueConfidentialiteRoute =
+  PolitiqueConfidentialiteRouteImport.update({
+    id: '/politique-confidentialite',
+    path: '/politique-confidentialite',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -25,32 +38,67 @@ const ApiPublicQuoteRequestRoute = ApiPublicQuoteRequestRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
+  '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
   '/api/public/quote-request': typeof ApiPublicQuoteRequestRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
+  '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
   '/api/public/quote-request': typeof ApiPublicQuoteRequestRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
+  '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
   '/api/public/quote-request': typeof ApiPublicQuoteRequestRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/quote-request'
+  fullPaths:
+    | '/'
+    | '/mentions-legales'
+    | '/politique-confidentialite'
+    | '/api/public/quote-request'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/quote-request'
-  id: '__root__' | '/' | '/api/public/quote-request'
+  to:
+    | '/'
+    | '/mentions-legales'
+    | '/politique-confidentialite'
+    | '/api/public/quote-request'
+  id:
+    | '__root__'
+    | '/'
+    | '/mentions-legales'
+    | '/politique-confidentialite'
+    | '/api/public/quote-request'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MentionsLegalesRoute: typeof MentionsLegalesRoute
+  PolitiqueConfidentialiteRoute: typeof PolitiqueConfidentialiteRoute
   ApiPublicQuoteRequestRoute: typeof ApiPublicQuoteRequestRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/politique-confidentialite': {
+      id: '/politique-confidentialite'
+      path: '/politique-confidentialite'
+      fullPath: '/politique-confidentialite'
+      preLoaderRoute: typeof PolitiqueConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -70,6 +118,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MentionsLegalesRoute: MentionsLegalesRoute,
+  PolitiqueConfidentialiteRoute: PolitiqueConfidentialiteRoute,
   ApiPublicQuoteRequestRoute: ApiPublicQuoteRequestRoute,
 }
 export const routeTree = rootRouteImport
