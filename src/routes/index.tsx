@@ -720,25 +720,11 @@ function Index() {
           </div>
         </Section>
 
-        {/* Avis clients */}
-        <Section id="avis" eyebrow="Témoignages" title="Nos clients nous recommandent" subtitle="Des interventions réussies partout dans le Morbihan et le Sud-Finistère.">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {REVIEWS.map((r) => (
-              <div key={r.name} className="reveal rounded-2xl border border-border bg-white p-6 shadow-soft flex flex-col">
-                <div className="flex text-brand-red mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
-                  ))}
-                </div>
-                <p className="text-navy/80 text-sm leading-relaxed flex-1">"{r.text}"</p>
-                <div className="mt-4 pt-4 border-t border-border">
-                  <div className="font-semibold text-navy text-sm">{r.name}</div>
-                  <div className="text-xs text-muted-foreground">{r.city}</div>
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* Avis clients — archivé, sera publié lorsque de véritables avis seront collectés
+        <Section id="avis" eyebrow="Témoignages" title="Nos clients nous recommandent">
+          ...
         </Section>
+        */}
 
         {/* Contact final */}
         <Section
