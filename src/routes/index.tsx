@@ -19,7 +19,7 @@ import {
   Clock,
   ThermometerSun,
   CheckCircle2,
-  Star,
+  // Star (archivé avec la section témoignages)
   ArrowRight,
   Users,
   Sparkles,
