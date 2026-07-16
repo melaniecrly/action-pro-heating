@@ -483,12 +483,8 @@ const FAQ = [
   { q: "Quelle différence entre rinçage et désembouage ?", a: "Le rinçage évacue l'eau sale, le désembouage utilise un produit chimique adapté puis un cycle complet pour éliminer les dépôts incrustés." },
 ];
 
-const REVIEWS = [
-  { name: "Sophie L.", city: "Vannes", text: "Intervention impeccable sur notre plancher chauffant. Chauffage redevenu homogène partout. Merci !" },
-  { name: "Jean-Marc P.", city: "Lorient", text: "Professionnels, ponctuels et pédagogues. Devis clair et respecté à l'euro près." },
-  { name: "Marie D.", city: "Quimperlé", text: "Après 12 ans sans entretien, mes radiateurs chauffent enfin correctement. Bravo pour le travail soigné." },
-  { name: "Fabrice R.", city: "Auray", text: "Un vrai artisan local qui prend le temps d'expliquer. Je recommande sans hésitation." },
-];
+// REVIEWS archivés — la section témoignages sera republiée avec de vrais avis clients.
+// const REVIEWS = [ ... ];
 
 function FaqItem({ q, a, i }: { q: string; a: string; i: number }) {
   const [open, setOpen] = useState(i === 0);
