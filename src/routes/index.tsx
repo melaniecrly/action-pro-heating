@@ -48,9 +48,9 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const PHONE_DISPLAY = "02 00 00 00 00";
-const PHONE_LINK = "tel:+33200000000";
-const EMAIL = "contact@action-desembouage.fr";
+const PHONE_DISPLAY = "07 59 75 02 18";
+const PHONE_LINK = "tel:+33759750218";
+const EMAIL = "contact@actiondesembouage.fr";
 
 const NAV = [
   { id: "accueil", label: "Accueil" },
@@ -58,7 +58,6 @@ const NAV = [
   { id: "qualifications", label: "Qualifications" },
   { id: "desembouage", label: "Le désembouage" },
   { id: "faq", label: "FAQ" },
-  { id: "avis", label: "Avis clients" },
   { id: "contact", label: "Contact" },
 ];
 
