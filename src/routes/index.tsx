@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
   Phone,
@@ -19,7 +19,7 @@ import {
   Clock,
   ThermometerSun,
   CheckCircle2,
-  Star,
+  // Star (archivé avec la section témoignages)
   ArrowRight,
   Users,
   Sparkles,
@@ -40,7 +40,7 @@ export const Route = createFileRoute("/")({
           description:
             "Spécialiste du désembouage de systèmes de chauffage : planchers chauffants, radiateurs et installations solaires dans le Morbihan et le Sud-Finistère.",
           areaServed: ["Morbihan", "Sud-Finistère"],
-          telephone: "+33200000000",
+          telephone: "+33759750218",
           priceRange: "€€",
         }),
       },
@@ -48,9 +48,9 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const PHONE_DISPLAY = "02 00 00 00 00";
-const PHONE_LINK = "tel:+33200000000";
-const EMAIL = "contact@action-desembouage.fr";
+const PHONE_DISPLAY = "07 59 75 02 18";
+const PHONE_LINK = "tel:+33759750218";
+const EMAIL = "contact@actiondesembouage.fr";
 
 const NAV = [
   { id: "accueil", label: "Accueil" },
@@ -58,7 +58,6 @@ const NAV = [
   { id: "qualifications", label: "Qualifications" },
   { id: "desembouage", label: "Le désembouage" },
   { id: "faq", label: "FAQ" },
-  { id: "avis", label: "Avis clients" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -207,18 +206,6 @@ function Hero() {
               <Phone className="w-4 h-4" /> Appeler maintenant
             </a>
           </div>
-          <div className="mt-10 grid grid-cols-3 gap-4 max-w-md">
-            {[
-              { n: "15+", l: "années d'expertise" },
-              { n: "500+", l: "installations traitées" },
-              { n: "100%", l: "clients satisfaits" },
-            ].map((s) => (
-              <div key={s.l}>
-                <div className="text-2xl sm:text-3xl font-bold text-navy font-display">{s.n}</div>
-                <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
-              </div>
-            ))}
-          </div>
         </div>
 
         <div className="reveal relative">
@@ -240,7 +227,7 @@ function Hero() {
               </div>
               <div>
                 <div className="font-semibold text-navy text-sm">Rendement optimisé</div>
-                <div className="text-xs text-muted-foreground">jusqu'à -25% de conso</div>
+                <div className="text-xs text-muted-foreground">jusqu'à -15% de conso</div>
               </div>
             </div>
           </div>
@@ -283,9 +270,47 @@ function Section({ id, eyebrow, title, subtitle, children, tone = "white" }: {
 }
 
 function BretagneMap() {
+  // Stylized Bretagne silhouette. East side (right) attaches to mainland France.
+  // Departments approx:
+  //   Finistère (west)      - top-left + bottom-left
+  //   Côtes-d'Armor (north) - top-right
+  //   Ille-et-Vilaine (east)- right
+  //   Morbihan (south)      - bottom-center/right
+  const bretagne =
+    "M 560,140 " +
+    "L 560,110 L 540,105 L 520,120 L 495,105 L 470,115 L 445,100 " + // north coast east
+    "L 420,115 L 395,105 L 370,120 L 345,110 L 320,125 L 295,115 " + // north coast center
+    "L 270,130 L 245,120 L 220,135 L 195,125 L 170,140 L 145,130 " + // north coast west
+    "L 118,150 L 95,140 L 78,160 L 65,155 " +                        // Léon
+    "L 55,175 L 40,180 L 30,200 L 42,215 L 60,210 " +                // Iroise / Pointe St Mathieu
+    "L 55,230 L 40,240 L 30,255 L 45,265 L 65,258 L 55,275 " +       // Crozon peninsula (jag)
+    "L 75,285 L 95,275 L 88,295 L 68,305 L 55,320 " +                // Pointe du Raz area
+    "L 75,330 L 100,318 L 125,325 L 145,318 L 160,335 " +            // Cap Sizun / Audierne
+    "L 185,325 L 200,340 L 225,332 L 245,342 " +                     // Quimper south
+    "L 265,340 L 285,352 L 305,345 L 320,358 L 340,350 " +           // Concarneau / Quimperlé
+    "L 360,360 L 380,352 L 395,365 L 410,355 " +                     // Lorient
+    "L 420,370 L 400,378 L 415,382 L 435,372 L 455,378 " +           // Quiberon peninsula dip
+    "L 475,368 L 490,378 L 510,370 L 530,362 " +                     // Golfe du Morbihan / Vannes
+    "L 550,352 L 570,340 L 585,320 L 578,300 " +                     // south-east coast
+    "L 588,280 L 580,260 L 590,240 L 580,220 L 588,200 L 578,180 L 585,160 Z";
+
+  // Sud-Finistère: south-western portion
+  const sudFinistere =
+    "M 30,200 L 42,215 L 60,210 L 55,230 L 40,240 L 30,255 L 45,265 L 65,258 L 55,275 " +
+    "L 75,285 L 95,275 L 88,295 L 68,305 L 55,320 L 75,330 L 100,318 L 125,325 L 145,318 L 160,335 " +
+    "L 185,325 L 200,340 L 225,332 L 245,342 L 265,340 L 285,352 L 300,345 " +
+    "L 305,300 L 285,270 L 250,250 L 210,235 L 170,225 L 130,220 L 90,215 L 55,205 Z";
+
+  // Morbihan: south-eastern portion
+  const morbihan =
+    "M 300,345 L 305,340 L 320,358 L 340,350 L 360,360 L 380,352 L 395,365 L 410,355 " +
+    "L 420,370 L 400,378 L 415,382 L 435,372 L 455,378 L 475,368 L 490,378 L 510,370 L 530,362 " +
+    "L 550,352 L 555,335 L 540,320 L 515,308 L 485,300 L 450,295 L 415,292 L 380,290 " +
+    "L 345,295 L 320,310 L 305,325 Z";
+
   return (
     <div className="relative w-full aspect-[4/3] max-w-lg mx-auto reveal">
-      <svg viewBox="0 0 500 400" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 620 420" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="mor" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="#04B2D9" />
@@ -295,45 +320,42 @@ function BretagneMap() {
             <stop offset="0%" stopColor="#048ABF" />
             <stop offset="100%" stopColor="#1B3659" />
           </linearGradient>
-          <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="2" />
-          </filter>
         </defs>
-        {/* Base brittany silhouette (stylized) */}
-        <path
-          d="M40,180 C60,140 100,120 160,115 C220,110 260,90 320,95 C380,100 430,130 460,170 C475,200 470,235 450,255 C420,285 380,300 340,305 C300,310 270,325 230,325 C180,325 130,315 90,290 C55,270 30,235 40,180 Z"
-          fill="#EAF3F9"
-          stroke="#CFE1EC"
-          strokeWidth="1.5"
-        />
-        {/* Sud Finistère (west) */}
-        <path
-          d="M40,180 C60,140 100,120 160,115 C190,113 205,120 210,150 C215,190 195,235 165,270 C130,300 90,290 65,270 C40,250 30,215 40,180 Z"
-          fill="url(#fin)"
-          opacity="0.9"
-          filter="url(#soft)"
-        />
-        {/* Morbihan (south) */}
-        <path
-          d="M180,220 C200,205 240,205 285,215 C330,225 370,245 385,275 C395,300 375,315 340,318 C300,322 250,325 210,315 C180,308 165,285 170,260 C172,245 175,232 180,220 Z"
-          fill="url(#mor)"
-          opacity="0.95"
-          filter="url(#soft)"
-        />
-        {/* labels */}
+
+        {/* Base Bretagne silhouette */}
+        <path d={bretagne} fill="#EAF3F9" stroke="#B8D3E3" strokeWidth="1.5" strokeLinejoin="round" />
+
+        {/* Sud-Finistère highlighted */}
+        <path d={sudFinistere} fill="url(#fin)" opacity="0.92" stroke="#ffffff" strokeWidth="1.2" />
+
+        {/* Morbihan highlighted */}
+        <path d={morbihan} fill="url(#mor)" opacity="0.95" stroke="#ffffff" strokeWidth="1.2" />
+
+        {/* Labels */}
         <g fontFamily="Plus Jakarta Sans, sans-serif" fontWeight="700">
-          <text x="115" y="200" fill="#fff" fontSize="14" textAnchor="middle">Sud Finistère</text>
-          <text x="275" y="275" fill="#fff" fontSize="16" textAnchor="middle">Morbihan</text>
+          <text x="150" y="290" fill="#ffffff" fontSize="14" textAnchor="middle">Sud-Finistère</text>
+          <text x="430" y="340" fill="#ffffff" fontSize="16" textAnchor="middle">Morbihan</text>
+          <text x="400" y="180" fill="#1B3659" fontSize="11" textAnchor="middle" opacity="0.55">Côtes-d'Armor</text>
+          <text x="545" y="230" fill="#1B3659" fontSize="11" textAnchor="middle" opacity="0.55">Ille-et-Vilaine</text>
+          <text x="150" y="180" fill="#1B3659" fontSize="11" textAnchor="middle" opacity="0.55">Finistère Nord</text>
         </g>
-        {/* pins */}
+
+        {/* Pins - Vannes (Morbihan) */}
         <g>
-          <circle cx="275" cy="270" r="6" fill="#D90D1E" />
-          <circle cx="275" cy="270" r="12" fill="#D90D1E" opacity="0.25">
+          <circle cx="470" cy="355" r="6" fill="#D90D1E" />
+          <circle cx="470" cy="355" r="12" fill="#D90D1E" opacity="0.25">
             <animate attributeName="r" values="10;18;10" dur="2.4s" repeatCount="indefinite" />
             <animate attributeName="opacity" values="0.35;0;0.35" dur="2.4s" repeatCount="indefinite" />
           </circle>
-          <circle cx="120" cy="195" r="5" fill="#D90D1E" />
-          <circle cx="120" cy="195" r="10" fill="#D90D1E" opacity="0.25">
+          {/* Lorient */}
+          <circle cx="380" cy="345" r="5" fill="#D90D1E" />
+          <circle cx="380" cy="345" r="10" fill="#D90D1E" opacity="0.25">
+            <animate attributeName="r" values="8;16;8" dur="2.4s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.35;0;0.35" dur="2.4s" repeatCount="indefinite" />
+          </circle>
+          {/* Quimperlé / Sud-Finistère */}
+          <circle cx="240" cy="320" r="5" fill="#D90D1E" />
+          <circle cx="240" cy="320" r="10" fill="#D90D1E" opacity="0.25">
             <animate attributeName="r" values="8;16;8" dur="2.4s" repeatCount="indefinite" />
             <animate attributeName="opacity" values="0.35;0;0.35" dur="2.4s" repeatCount="indefinite" />
           </circle>
@@ -344,12 +366,32 @@ function BretagneMap() {
 }
 
 function ContactForm() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        setSent(true);
+        if (status === "sending") return;
+        setStatus("sending");
+        setErrorMsg(null);
+        const fd = new FormData(e.currentTarget);
+        const payload = Object.fromEntries(fd.entries());
+        try {
+          const res = await fetch("/api/public/quote-request", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          setStatus("sent");
+          (e.target as HTMLFormElement).reset();
+        } catch (err) {
+          console.error(err);
+          setErrorMsg("Impossible d'envoyer votre demande. Merci d'appeler ou d'écrire par email.");
+          setStatus("error");
+        }
       }}
       className="bg-white rounded-3xl shadow-soft border border-border p-6 sm:p-8 grid gap-4"
     >
@@ -358,7 +400,7 @@ function ContactForm() {
         <Input label="Prénom" name="prenom" required />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
-        <Input label="Téléphone" name="tel" type="tel" required />
+        <Input label="Téléphone" name="telephone" type="tel" required />
         <Input label="Email" name="email" type="email" required />
       </div>
       <Input label="Adresse" name="adresse" />
@@ -375,13 +417,25 @@ function ContactForm() {
           placeholder="Symptômes constatés, âge de l'installation, surface concernée..."
         />
       </div>
-      <button type="submit" className="btn-cta w-full sm:w-auto justify-center">
-        {sent ? "Demande envoyée ✓" : "Envoyer ma demande"}
-        {!sent && <ArrowRight className="w-4 h-4" />}
+      {/* Honeypot anti-spam */}
+      <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+
+      <button type="submit" disabled={status === "sending"} className="btn-cta w-full sm:w-auto justify-center disabled:opacity-70">
+        {status === "sending" ? "Envoi en cours..." : status === "sent" ? "Demande envoyée ✓" : "Envoyer ma demande"}
+        {status === "idle" && <ArrowRight className="w-4 h-4" />}
       </button>
-      {sent && (
-        <p className="text-sm text-navy/70">Merci ! Nous vous recontactons sous 24h ouvrées.</p>
+      {status === "sent" && (
+        <p className="text-sm text-navy/70">
+          Merci ! Votre demande a bien été transmise à <strong>contact@actiondesembouage.fr</strong>. Nous vous recontactons sous 24h ouvrées.
+        </p>
       )}
+      {status === "error" && errorMsg && (
+        <p className="text-sm text-brand-red">{errorMsg}</p>
+      )}
+      <p className="text-xs text-muted-foreground">
+        En envoyant ce formulaire, vous acceptez notre{" "}
+        <Link to="/politique-confidentialite" className="underline hover:text-blue-secondary">politique de confidentialité</Link>.
+      </p>
     </form>
   );
 }
@@ -461,12 +515,8 @@ const FAQ = [
   { q: "Quelle différence entre rinçage et désembouage ?", a: "Le rinçage évacue l'eau sale, le désembouage utilise un produit chimique adapté puis un cycle complet pour éliminer les dépôts incrustés." },
 ];
 
-const REVIEWS = [
-  { name: "Sophie L.", city: "Vannes", text: "Intervention impeccable sur notre plancher chauffant. Chauffage redevenu homogène partout. Merci !" },
-  { name: "Jean-Marc P.", city: "Lorient", text: "Professionnels, ponctuels et pédagogues. Devis clair et respecté à l'euro près." },
-  { name: "Marie D.", city: "Quimperlé", text: "Après 12 ans sans entretien, mes radiateurs chauffent enfin correctement. Bravo pour le travail soigné." },
-  { name: "Fabrice R.", city: "Auray", text: "Un vrai artisan local qui prend le temps d'expliquer. Je recommande sans hésitation." },
-];
+// REVIEWS archivés — la section témoignages sera republiée avec de vrais avis clients.
+// const REVIEWS = [ ... ];
 
 function FaqItem({ q, a, i }: { q: string; a: string; i: number }) {
   const [open, setOpen] = useState(i === 0);
@@ -565,7 +615,7 @@ function Index() {
             <div className="reveal grid gap-4">
               <div className="rounded-2xl border border-border p-6 bg-white text-center flex flex-col items-center justify-center min-h-[140px]">
                 <Shield className="w-8 h-8 text-blue-secondary mb-2" />
-                <div className="text-sm font-semibold text-navy">Assurance décennale</div>
+                <div className="text-sm font-semibold text-navy">Responsabilité civile</div>
               </div>
               <div className="rounded-2xl border border-border p-6 bg-white text-center flex flex-col items-center justify-center min-h-[140px]">
                 <CheckCircle2 className="w-8 h-8 text-turquoise mb-2" />
@@ -698,25 +748,11 @@ function Index() {
           </div>
         </Section>
 
-        {/* Avis clients */}
-        <Section id="avis" eyebrow="Témoignages" title="Nos clients nous recommandent" subtitle="Des interventions réussies partout dans le Morbihan et le Sud-Finistère.">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {REVIEWS.map((r) => (
-              <div key={r.name} className="reveal rounded-2xl border border-border bg-white p-6 shadow-soft flex flex-col">
-                <div className="flex text-brand-red mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
-                  ))}
-                </div>
-                <p className="text-navy/80 text-sm leading-relaxed flex-1">"{r.text}"</p>
-                <div className="mt-4 pt-4 border-t border-border">
-                  <div className="font-semibold text-navy text-sm">{r.name}</div>
-                  <div className="text-xs text-muted-foreground">{r.city}</div>
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* Avis clients — archivé, sera publié lorsque de véritables avis seront collectés
+        <Section id="avis" eyebrow="Témoignages" title="Nos clients nous recommandent">
+          ...
         </Section>
+        */}
 
         {/* Contact final */}
         <Section
@@ -820,8 +856,8 @@ function Index() {
           <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-3 text-xs text-white/60">
             <div>© {new Date().getFullYear()} Action Désembouage. Tous droits réservés.</div>
             <div className="flex gap-4">
-              <a href="#" className="hover:text-turquoise">Mentions légales</a>
-              <a href="#" className="hover:text-turquoise">Politique de confidentialité</a>
+              <Link to="/mentions-legales" className="hover:text-turquoise">Mentions légales</Link>
+              <Link to="/politique-confidentialite" className="hover:text-turquoise">Politique de confidentialité</Link>
             </div>
           </div>
         </div>
