@@ -207,7 +207,6 @@ function Hero() {
             </a>
           </div>
         </div>
-        </div>
 
         <div className="reveal relative">
           <div className="relative rounded-3xl overflow-hidden shadow-elevated">
