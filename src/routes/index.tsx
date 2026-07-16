@@ -474,9 +474,8 @@ function Select({ label, name, options }: { label: string; name: string; options
 
 const STEPS = [
   { icon: Search, title: "Diagnostic", text: "Analyse complète de votre installation et détection des points critiques." },
-  { icon: Droplets, title: "Injection", text: "Introduction du produit désembouant adapté à votre réseau." },
-  { icon: Waves, title: "Circulation", text: "Mise en circulation forcée pour décoller les dépôts internes." },
-  { icon: Filter, title: "Évacuation", text: "Extraction complète des boues et impuretés du circuit." },
+  { icon: Droplets, title: "Nettoyage", text: "Injection du produit désembouant et mise en circulation forcée pour décoller les dépôts internes." },
+  { icon: Waves, title: "Rinçage", text: "Rinçage complet du circuit et évacuation des boues et impuretés." },
   { icon: Shield, title: "Protection", text: "Ajout d'un inhibiteur pour protéger et optimiser durablement." },
 ];
 
@@ -630,7 +629,7 @@ function Index() {
           id="desembouage"
           eyebrow="Le désembouage"
           title="Comment se déroule une intervention ?"
-          subtitle="Un protocole rigoureux en 5 étapes pour redonner à votre installation toute sa performance."
+          subtitle="Un protocole rigoureux en 4 étapes pour redonner à votre installation toute sa performance."
           tone="muted"
         >
           <div className="relative">
