@@ -206,18 +206,7 @@ function Hero() {
               <Phone className="w-4 h-4" /> Appeler maintenant
             </a>
           </div>
-          <div className="mt-10 grid grid-cols-3 gap-4 max-w-md">
-            {[
-              { n: "15+", l: "années d'expertise" },
-              { n: "500+", l: "installations traitées" },
-              { n: "100%", l: "clients satisfaits" },
-            ].map((s) => (
-              <div key={s.l}>
-                <div className="text-2xl sm:text-3xl font-bold text-navy font-display">{s.n}</div>
-                <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
-              </div>
-            ))}
-          </div>
+        </div>
         </div>
 
         <div className="reveal relative">
