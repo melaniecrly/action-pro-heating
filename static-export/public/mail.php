@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * mail.php — Formulaire de contact / demande de devis
  * Action Désembouage — Compatible IONOS Web Hosting Plus (PHP 8.x)
@@ -10,8 +11,6 @@
 const RECIPIENT_EMAIL = 'contact@actiondesembouage.fr';
 const RECIPIENT_NAME  = 'Action Désembouage';
 // ------------------------------------------------------------------
-
-declare(strict_types=1);
 
 // --- Réponse toujours en JSON ---
 header('Content-Type: application/json; charset=utf-8');
