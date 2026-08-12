@@ -270,12 +270,12 @@ function Section({ id, eyebrow, title, subtitle, children, tone = "white" }: {
 }
 
 function ProximityIllustration() {
-  // Iconographie compacte et lisible : un repère géolocalisé contenant un
-  // artisan (silhouette), relié par un trait pointillé à la maison du
-  // client, avec des anneaux de proximité. L'information « artisan local
-  // proche de chez vous » est immédiatement compréhensible.
+  // Iconographie lisible : un repère géolocalisé contenant un artisan
+  // (silhouette), relié par un trait pointillé à la maison du client, avec
+  // des anneaux de proximité. L'information « artisan local proche de chez
+  // vous » est immédiatement compréhensible.
   return (
-    <div className="relative w-full max-w-[210px] mx-auto sm:mx-0 reveal">
+    <div className="relative w-full max-w-[360px] mx-auto sm:mx-0 reveal">
       <svg viewBox="0 0 200 210" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Artisan local proche de chez vous dans le Morbihan et le Sud-Finistère">
         <defs>
           <linearGradient id="pinGrad2" x1="0" y1="0" x2="0" y2="1">
