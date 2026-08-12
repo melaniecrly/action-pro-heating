@@ -270,96 +270,85 @@ function Section({ id, eyebrow, title, subtitle, children, tone = "white" }: {
 }
 
 function ProximityIllustration() {
-  // Iconographie sobre évoquant la proximité d'un artisan local :
-  // un repère géolocalisé (pin) au-dessus d'un fond carte discret, des
-  // anneaux de proximité et un outil (clé) symbolisant le savoir-faire.
+  // Iconographie compacte et lisible : un repère géolocalisé contenant un
+  // artisan (silhouette), relié par un trait pointillé à la maison du
+  // client, avec des anneaux de proximité. L'information « artisan local
+  // proche de chez vous » est immédiatement compréhensible.
   return (
-    <div className="relative w-full max-w-md mx-auto reveal">
-      <div className="relative rounded-3xl border border-border bg-gradient-to-br from-white to-accent/40 p-6 sm:p-8 shadow-soft overflow-hidden">
-        {/* halo décoratif */}
-        <div
-          aria-hidden
-          className="absolute -top-16 -right-16 w-48 h-48 rounded-full opacity-25 blur-2xl"
-          style={{ background: "radial-gradient(circle, var(--turquoise), transparent 70%)" }}
-        />
-        <svg viewBox="0 0 360 320" className="w-full h-auto relative" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Artisan local proche de chez vous dans le Morbihan et le Sud-Finistère">
-          <defs>
-            <linearGradient id="pinGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#04B2D9" />
-              <stop offset="100%" stopColor="#1B3659" />
-            </linearGradient>
-            <linearGradient id="panelGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#EAF3F9" />
-              <stop offset="100%" stopColor="#F7FBFD" />
-            </linearGradient>
-          </defs>
+    <div className="relative w-full max-w-[210px] mx-auto sm:mx-0 reveal">
+      <svg viewBox="0 0 200 210" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Artisan local proche de chez vous dans le Morbihan et le Sud-Finistère">
+        <defs>
+          <linearGradient id="pinGrad2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#04B2D9" />
+            <stop offset="100%" stopColor="#1B3659" />
+          </linearGradient>
+          <linearGradient id="panelGrad2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#EAF3F9" />
+            <stop offset="100%" stopColor="#F7FBFD" />
+          </linearGradient>
+        </defs>
 
-          {/* panneau carte discret */}
-          <rect x="24" y="28" width="312" height="244" rx="22" fill="url(#panelGrad)" stroke="#B8D3E3" strokeWidth="1.5" />
+        {/* panneau discret */}
+        <rect x="6" y="6" width="188" height="198" rx="22" fill="url(#panelGrad2)" stroke="#B8D3E3" strokeWidth="1.5" />
 
-          {/* grille routière faint */}
-          <g stroke="#9FC2D6" strokeWidth="1" opacity="0.35">
-            <path d="M24,110 H336" />
-            <path d="M24,180 H336" />
-            <path d="M120,28 V272" />
-            <path d="M240,28 V272" />
+        {/* grille faint */}
+        <g stroke="#9FC2D6" strokeWidth="1" opacity="0.3">
+          <path d="M6,70 H194" />
+          <path d="M6,130 H194" />
+          <path d="M70,6 V204" />
+          <path d="M140,6 V204" />
+        </g>
+
+        {/* maison - client (en bas à gauche) */}
+        <g transform="translate(28,132)">
+          <path d="M0,26 V13 L13,2 L26,13 V26 Z" fill="#FFFFFF" stroke="#1B3659" strokeWidth="2" strokeLinejoin="round" />
+          <path d="M0,13 L13,2 L26,13" fill="#04B2D9" opacity="0.18" stroke="#1B3659" strokeWidth="2" strokeLinejoin="round" />
+          <rect x="9" y="16" width="7" height="10" fill="#1B3659" opacity="0.75" rx="1" />
+          <rect x="18" y="16" width="5" height="5" fill="#1B3659" opacity="0.25" rx="1" />
+        </g>
+
+        {/* trait pointillé maison -> pin (proximité) */}
+        <path d="M64,150 C80,140 92,128 102,118" fill="none" stroke="#1B3659" strokeWidth="2" strokeDasharray="4 5" strokeLinecap="round" opacity="0.6" />
+
+        {/* anneaux de proximité animés */}
+        <g transform="translate(108,90)">
+          <circle r="20" fill="#04B2D9" opacity="0.16">
+            <animate attributeName="r" values="16;42;16" dur="3s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.26;0;0.26" dur="3s" repeatCount="indefinite" />
+          </circle>
+          <circle r="14" fill="#04B2D9" opacity="0.2">
+            <animate attributeName="r" values="12;30;12" dur="3s" begin="0.8s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" begin="0.8s" repeatCount="indefinite" />
+          </circle>
+        </g>
+
+        {/* pin géolocalisé contenant l'artisan (silhouette) */}
+        <g transform="translate(108,90)">
+          <path d="M0,-32 C-17,-32 -27,-19 -27,-3 C-27,16 0,42 0,42 C0,42 27,16 27,-3 C27,-19 17,-32 0,-32 Z" fill="url(#pinGrad2)" stroke="#FFFFFF" strokeWidth="2" />
+          {/* silhouette artisan */}
+          <g transform="translate(0,-2)" fill="#FFFFFF">
+            <circle cx="0" cy="-8" r="5.5" />
+            <path d="M-10,9 C-10,1 -3,-2 0,-2 C3,-2 10,1 10,9 Z" />
           </g>
-          {/* axes routiers doux */}
-          <path d="M40,230 C120,200 200,120 336,150" fill="none" stroke="#048ABF" strokeWidth="2.5" opacity="0.35" strokeLinecap="round" />
-          <path d="M40,80 C140,120 220,90 336,210" fill="none" stroke="#1B3659" strokeWidth="2.5" opacity="0.18" strokeLinecap="round" />
+        </g>
 
-          {/* maison - client */}
-          <g transform="translate(48,196)">
-            <path d="M0,28 V14 L14,2 L28,14 V28 Z" fill="#FFFFFF" stroke="#1B3659" strokeWidth="2" strokeLinejoin="round" />
-            <path d="M0,14 L14,2 L28,14" fill="#04B2D9" opacity="0.18" stroke="#1B3659" strokeWidth="2" strokeLinejoin="round" />
-            <rect x="10" y="18" width="8" height="10" fill="#1B3659" opacity="0.75" rx="1" />
-            <rect x="2" y="16" width="6" height="6" fill="#1B3659" opacity="0.25" rx="1" />
-          </g>
+        {/* points d'intervention */}
+        <circle cx="150" cy="150" r="3.5" fill="#D90D1E" opacity="0.85" />
+        <circle cx="60" cy="60" r="3.5" fill="#D90D1E" opacity="0.85" />
 
-          {/* trait pointillé reliant la maison au pin (proximité) */}
-          <path d="M96,200 C140,196 170,188 196,180" fill="none" stroke="#1B3659" strokeWidth="2" strokeDasharray="4 5" strokeLinecap="round" opacity="0.55" />
-
-          {/* anneaux de proximité animés */}
-          <g transform="translate(220,150)">
-            <circle r="20" fill="#04B2D9" opacity="0.18">
-              <animate attributeName="r" values="18;46;18" dur="3s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.28;0;0.28" dur="3s" repeatCount="indefinite" />
+        {/* pastille "Artisan proche" */}
+        <g transform="translate(100,184)">
+          <rect x="-56" y="-13" width="112" height="26" rx="13" fill="#1B3659" />
+          <g transform="translate(-42,0)">
+            <circle r="4.5" fill="#04B2D9" />
+            <circle r="4.5" fill="#04B2D9" opacity="0.45">
+              <animate attributeName="r" values="4.5;8;4.5" dur="2.4s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.5;0;0.5" dur="2.4s" repeatCount="indefinite" />
             </circle>
-            <circle r="14" fill="#04B2D9" opacity="0.22">
-              <animate attributeName="r" values="12;32;12" dur="3s" begin="0.8s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" begin="0.8s" repeatCount="indefinite" />
-            </circle>
           </g>
-
-          {/* pin géolocalisé (artisan) */}
-          <g transform="translate(220,150)">
-            <path d="M0,-30 C-16,-30 -26,-18 -26,-4 C-26,14 0,38 0,38 C0,38 26,14 26,-4 C26,-18 16,-30 0,-30 Z" fill="url(#pinGrad)" stroke="#FFFFFF" strokeWidth="2" />
-            {/* clé / outil à l'intérieur */}
-            <g transform="translate(0,-2)">
-              <circle cx="-6" cy="0" r="5" fill="none" stroke="#FFFFFF" strokeWidth="2" />
-              <path d="M-1,0 L10,0 M7,-3 L10,0 L7,3" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </g>
-          </g>
-
-          {/* petits points d'intervention */}
-          <circle cx="120" cy="92" r="4" fill="#D90D1E" opacity="0.85" />
-          <circle cx="296" cy="96" r="4" fill="#D90D1E" opacity="0.85" />
-          <circle cx="288" cy="232" r="4" fill="#D90D1E" opacity="0.85" />
-
-          {/* pastille "proche" */}
-          <g transform="translate(120,300)">
-            <rect x="-58" y="-14" width="116" height="28" rx="14" fill="#1B3659" />
-            <g transform="translate(-44,0)">
-              <circle r="5" fill="#04B2D9" />
-              <circle r="5" fill="#04B2D9" opacity="0.4">
-                <animate attributeName="r" values="5;9;5" dur="2.4s" repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.5;0;0.5" dur="2.4s" repeatCount="indefinite" />
-              </circle>
-            </g>
-            <text x="6" y="4" fill="#FFFFFF" fontSize="12" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight="700" textAnchor="middle">Artisan proche</text>
-          </g>
-        </svg>
-      </div>
+          <text x="8" y="4" fill="#FFFFFF" fontSize="11" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight="700" textAnchor="middle">Artisan proche</text>
+        </g>
+      </svg>
     </div>
   );
 }
