@@ -555,7 +555,7 @@ function Index() {
           tone="muted"
         >
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <BretagneMap />
+            <ProximityIllustration />
             <div className="reveal">
               <ul className="space-y-4 mb-8">
                 {[
