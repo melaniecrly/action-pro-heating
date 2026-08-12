@@ -624,8 +624,9 @@ function Index() {
         >
           <div className="relative">
             {/* progress line */}
-            <div className="hidden lg:block absolute top-8 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-turquoise via-blue-secondary to-navy opacity-40" />
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 relative">
+            <div className="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-turquoise via-blue-secondary to-navy opacity-40" />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative">
+
               {STEPS.map((s, i) => {
                 const Icon = s.icon;
                 return (
