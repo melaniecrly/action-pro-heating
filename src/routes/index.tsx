@@ -543,33 +543,33 @@ function Index() {
           subtitle="Action Désembouage intervient auprès des particuliers et des professionnels sur l'ensemble du Morbihan ainsi que dans le Sud-Finistère."
           tone="muted"
         >
-          <div className="reveal rounded-3xl border border-border bg-white shadow-soft p-6 sm:p-8 lg:p-10">
-            <div className="grid sm:grid-cols-[auto_minmax(0,1fr)] gap-6 sm:gap-8 lg:gap-10 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="order-2 lg:order-1 reveal flex justify-center lg:justify-start">
               <ProximityIllustration />
-              <div>
-                <ul className="space-y-4 mb-8">
-                  {[
-                    "Vannes, Lorient, Auray, Quimperlé",
-                    "Interventions particuliers et professionnels",
-                    "Devis gratuit et sans engagement",
-                    "Déplacement rapide sur toute la zone",
-                  ].map((t) => (
-                    <li key={t} className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-turquoise/15 grid place-items-center mt-0.5 shrink-0">
-                        <CheckCircle2 className="w-4 h-4 text-blue-secondary" />
-                      </div>
-                      <span className="text-navy/80">{t}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="flex flex-wrap gap-3">
-                  <button onClick={() => scrollToId("contact")} className="btn-cta">
-                    Prendre rendez-vous <ArrowRight className="w-4 h-4" />
-                  </button>
-                  <a href={PHONE_LINK} className="btn-ghost">
-                    <Phone className="w-4 h-4" /> {PHONE_DISPLAY}
-                  </a>
-                </div>
+            </div>
+            <div className="order-1 lg:order-2">
+              <ul className="space-y-4 mb-8">
+                {[
+                  "Vannes, Lorient, Auray, Quimperlé",
+                  "Interventions particuliers et professionnels",
+                  "Devis gratuit et sans engagement",
+                  "Déplacement rapide sur toute la zone",
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-turquoise/15 grid place-items-center mt-0.5 shrink-0">
+                      <CheckCircle2 className="w-4 h-4 text-blue-secondary" />
+                    </div>
+                    <span className="text-navy/80">{t}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-wrap gap-3">
+                <button onClick={() => scrollToId("contact")} className="btn-cta">
+                  Prendre rendez-vous <ArrowRight className="w-4 h-4" />
+                </button>
+                <a href={PHONE_LINK} className="btn-ghost">
+                  <Phone className="w-4 h-4" /> {PHONE_DISPLAY}
+                </a>
               </div>
             </div>
           </div>
