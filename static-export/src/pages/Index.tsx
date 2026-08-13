@@ -533,9 +533,11 @@ export default function Index() {
           subtitle="Action Désembouage intervient auprès des particuliers et des professionnels sur l'ensemble du Morbihan ainsi que dans le Sud-Finistère."
           tone="muted"
         >
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <BretagneMap />
-            <div className="reveal">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="order-1 lg:order-1 reveal flex justify-center lg:justify-start">
+              <ProximityIllustration />
+            </div>
+            <div className="order-2 lg:order-2">
               <ul className="space-y-4 mb-8">
                 {[
                   "Vannes, Lorient, Auray, Quimperlé",
