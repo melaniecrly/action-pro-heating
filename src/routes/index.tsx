@@ -544,10 +544,10 @@ function Index() {
           tone="muted"
         >
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="order-2 lg:order-1 reveal flex justify-center lg:justify-start">
+            <div className="order-1 lg:order-1 reveal flex justify-center lg:justify-start">
               <ProximityIllustration />
             </div>
-            <div className="order-1 lg:order-2">
+            <div className="order-2 lg:order-2">
               <ul className="space-y-4 mb-8">
                 {[
                   "Vannes, Lorient, Auray, Quimperlé",
