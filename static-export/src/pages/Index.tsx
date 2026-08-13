@@ -241,76 +241,84 @@ function Section({ id, eyebrow, title, subtitle, children, tone = "white" }: {
   );
 }
 
-function BretagneMap() {
-  const bretagne =
-    "M 560,140 " +
-    "L 560,110 L 540,105 L 520,120 L 495,105 L 470,115 L 445,100 " +
-    "L 420,115 L 395,105 L 370,120 L 345,110 L 320,125 L 295,115 " +
-    "L 270,130 L 245,120 L 220,135 L 195,125 L 170,140 L 145,130 " +
-    "L 118,150 L 95,140 L 78,160 L 65,155 " +
-    "L 55,175 L 40,180 L 30,200 L 42,215 L 60,210 " +
-    "L 55,230 L 40,240 L 30,255 L 45,265 L 65,258 L 55,275 " +
-    "L 75,285 L 95,275 L 88,295 L 68,305 L 55,320 " +
-    "L 75,330 L 100,318 L 125,325 L 145,318 L 160,335 " +
-    "L 185,325 L 200,340 L 225,332 L 245,342 " +
-    "L 265,340 L 285,352 L 305,345 L 320,358 L 340,350 " +
-    "L 360,360 L 380,352 L 395,365 L 410,355 " +
-    "L 420,370 L 400,378 L 415,382 L 435,372 L 455,378 " +
-    "L 475,368 L 490,378 L 510,370 L 530,362 " +
-    "L 550,352 L 570,340 L 585,320 L 578,300 " +
-    "L 588,280 L 580,260 L 590,240 L 580,220 L 588,200 L 578,180 L 585,160 Z";
-
-  const sudFinistere =
-    "M 30,200 L 42,215 L 60,210 L 55,230 L 40,240 L 30,255 L 45,265 L 65,258 L 55,275 " +
-    "L 75,285 L 95,275 L 88,295 L 68,305 L 55,320 L 75,330 L 100,318 L 125,325 L 145,318 L 160,335 " +
-    "L 185,325 L 200,340 L 225,332 L 245,342 L 265,340 L 285,352 L 300,345 " +
-    "L 305,300 L 285,270 L 250,250 L 210,235 L 170,225 L 130,220 L 90,215 L 55,205 Z";
-
-  const morbihan =
-    "M 300,345 L 305,340 L 320,358 L 340,350 L 360,360 L 380,352 L 395,365 L 410,355 " +
-    "L 420,370 L 400,378 L 415,382 L 435,372 L 455,378 L 475,368 L 490,378 L 510,370 L 530,362 " +
-    "L 550,352 L 555,335 L 540,320 L 515,308 L 485,300 L 450,295 L 415,292 L 380,290 " +
-    "L 345,295 L 320,310 L 305,325 Z";
-
+function ProximityIllustration() {
+  // Iconographie lisible : un repère géolocalisé contenant un artisan
+  // (silhouette), relié par un trait pointillé à la maison du client, avec
+  // des anneaux de proximité. L'information « artisan local proche de chez
+  // vous » est immédiatement compréhensible.
   return (
-    <div className="relative w-full aspect-[4/3] max-w-lg mx-auto reveal">
-      <svg viewBox="0 0 620 420" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+    <div className="relative w-full max-w-[360px] mx-auto sm:mx-0 reveal">
+      <svg viewBox="0 0 200 210" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Artisan local proche de chez vous dans le Morbihan et le Sud-Finistère">
         <defs>
-          <linearGradient id="mor" x1="0" y1="0" x2="1" y2="1">
+          <linearGradient id="pinGrad2" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#04B2D9" />
-            <stop offset="100%" stopColor="#048ABF" />
-          </linearGradient>
-          <linearGradient id="fin" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#048ABF" />
             <stop offset="100%" stopColor="#1B3659" />
           </linearGradient>
+          <linearGradient id="panelGrad2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#EAF3F9" />
+            <stop offset="100%" stopColor="#F7FBFD" />
+          </linearGradient>
         </defs>
-        <path d={bretagne} fill="#EAF3F9" stroke="#B8D3E3" strokeWidth="1.5" strokeLinejoin="round" />
-        <path d={sudFinistere} fill="url(#fin)" opacity="0.92" stroke="#ffffff" strokeWidth="1.2" />
-        <path d={morbihan} fill="url(#mor)" opacity="0.95" stroke="#ffffff" strokeWidth="1.2" />
-        <g fontFamily="Plus Jakarta Sans, sans-serif" fontWeight="700">
-          <text x="150" y="290" fill="#ffffff" fontSize="14" textAnchor="middle">Sud-Finistère</text>
-          <text x="430" y="340" fill="#ffffff" fontSize="16" textAnchor="middle">Morbihan</text>
-          <text x="400" y="180" fill="#1B3659" fontSize="11" textAnchor="middle" opacity="0.55">Côtes-d'Armor</text>
-          <text x="545" y="230" fill="#1B3659" fontSize="11" textAnchor="middle" opacity="0.55">Ille-et-Vilaine</text>
-          <text x="150" y="180" fill="#1B3659" fontSize="11" textAnchor="middle" opacity="0.55">Finistère Nord</text>
+
+        {/* panneau discret */}
+        <rect x="6" y="6" width="188" height="198" rx="22" fill="url(#panelGrad2)" stroke="#B8D3E3" strokeWidth="1.5" />
+
+        {/* grille faint */}
+        <g stroke="#9FC2D6" strokeWidth="1" opacity="0.3">
+          <path d="M6,70 H194" />
+          <path d="M6,130 H194" />
+          <path d="M70,6 V204" />
+          <path d="M140,6 V204" />
         </g>
-        <g>
-          <circle cx="470" cy="355" r="6" fill="#D90D1E" />
-          <circle cx="470" cy="355" r="12" fill="#D90D1E" opacity="0.25">
-            <animate attributeName="r" values="10;18;10" dur="2.4s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.35;0;0.35" dur="2.4s" repeatCount="indefinite" />
+
+        {/* maison - client (en bas à gauche) */}
+        <g transform="translate(28,132)">
+          <path d="M0,26 V13 L13,2 L26,13 V26 Z" fill="#FFFFFF" stroke="#1B3659" strokeWidth="2" strokeLinejoin="round" />
+          <path d="M0,13 L13,2 L26,13" fill="#04B2D9" opacity="0.18" stroke="#1B3659" strokeWidth="2" strokeLinejoin="round" />
+          <rect x="9" y="16" width="7" height="10" fill="#1B3659" opacity="0.75" rx="1" />
+          <rect x="18" y="16" width="5" height="5" fill="#1B3659" opacity="0.25" rx="1" />
+        </g>
+
+        {/* trait pointillé maison -> pin (proximité) */}
+        <path d="M64,150 C80,140 92,128 102,118" fill="none" stroke="#1B3659" strokeWidth="2" strokeDasharray="4 5" strokeLinecap="round" opacity="0.6" />
+
+        {/* anneaux de proximité animés */}
+        <g transform="translate(108,90)">
+          <circle r="20" fill="#04B2D9" opacity="0.16">
+            <animate attributeName="r" values="16;42;16" dur="3s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.26;0;0.26" dur="3s" repeatCount="indefinite" />
           </circle>
-          <circle cx="380" cy="345" r="5" fill="#D90D1E" />
-          <circle cx="380" cy="345" r="10" fill="#D90D1E" opacity="0.25">
-            <animate attributeName="r" values="8;16;8" dur="2.4s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.35;0;0.35" dur="2.4s" repeatCount="indefinite" />
+          <circle r="14" fill="#04B2D9" opacity="0.2">
+            <animate attributeName="r" values="12;30;12" dur="3s" begin="0.8s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" begin="0.8s" repeatCount="indefinite" />
           </circle>
-          <circle cx="240" cy="320" r="5" fill="#D90D1E" />
-          <circle cx="240" cy="320" r="10" fill="#D90D1E" opacity="0.25">
-            <animate attributeName="r" values="8;16;8" dur="2.4s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.35;0;0.35" dur="2.4s" repeatCount="indefinite" />
-          </circle>
+        </g>
+
+        {/* pin géolocalisé contenant l'artisan (silhouette) */}
+        <g transform="translate(108,90)">
+          <path d="M0,-32 C-17,-32 -27,-19 -27,-3 C-27,16 0,42 0,42 C0,42 27,16 27,-3 C27,-19 17,-32 0,-32 Z" fill="url(#pinGrad2)" stroke="#FFFFFF" strokeWidth="2" />
+          {/* silhouette artisan */}
+          <g transform="translate(0,-2)" fill="#FFFFFF">
+            <circle cx="0" cy="-8" r="5.5" />
+            <path d="M-10,9 C-10,1 -3,-2 0,-2 C3,-2 10,1 10,9 Z" />
+          </g>
+        </g>
+
+        {/* points d'intervention */}
+        <circle cx="150" cy="150" r="3.5" fill="#D90D1E" opacity="0.85" />
+        <circle cx="60" cy="60" r="3.5" fill="#D90D1E" opacity="0.85" />
+
+        {/* pastille "Artisan proche" */}
+        <g transform="translate(100,184)">
+          <rect x="-56" y="-13" width="112" height="26" rx="13" fill="#1B3659" />
+          <g transform="translate(-42,0)">
+            <circle r="4.5" fill="#04B2D9" />
+            <circle r="4.5" fill="#04B2D9" opacity="0.45">
+              <animate attributeName="r" values="4.5;8;4.5" dur="2.4s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.5;0;0.5" dur="2.4s" repeatCount="indefinite" />
+            </circle>
+          </g>
+          <text x="8" y="4" fill="#FFFFFF" fontSize="11" fontFamily="Plus Jakarta Sans, sans-serif" fontWeight="700" textAnchor="middle">Artisan proche</text>
         </g>
       </svg>
     </div>
@@ -525,9 +533,11 @@ export default function Index() {
           subtitle="Action Désembouage intervient auprès des particuliers et des professionnels sur l'ensemble du Morbihan ainsi que dans le Sud-Finistère."
           tone="muted"
         >
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <BretagneMap />
-            <div className="reveal">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="order-1 lg:order-1 reveal flex justify-center lg:justify-start">
+              <ProximityIllustration />
+            </div>
+            <div className="order-2 lg:order-2">
               <ul className="space-y-4 mb-8">
                 {[
                   "Vannes, Lorient, Auray, Quimperlé",
